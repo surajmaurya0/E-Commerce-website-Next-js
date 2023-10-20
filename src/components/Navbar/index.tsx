@@ -49,21 +49,21 @@ const Navbar = () => {
           <div className="flex md:order-2 gap-2">
             {!isAdminView && isAuthUser ? (
               <Fragment>
-                <button className={styles.button}>Account</button>
-                <button className={styles.button}>cart</button>
+                <button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">Account</button>
+                <button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">cart</button>
               </Fragment>
             ) : null}
             {isAuthUser && user.role === "admin" ? (
               isAdminView ? (
-                <button className={styles.button}> Client View</button>
+                <button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"> Client View</button>
               ) : (
-                <button className={styles.button}>Admin View</button>
+                <button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">Admin View</button>
               )
             ) : null}
             {isAuthUser ? (
-              <button className={styles.button}>Logout</button>
+              <button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">Logout</button>
             ) : (
-              <button className={styles.button}>Login</button>
+              <button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">Login</button>
             )}
             <button
               data-collapse-toggle="navbar-sticky"

@@ -1,7 +1,7 @@
 interface SelectComponents {
   label: string;
-  value: string;
-  onChange: () => void;
+  value?: string;
+  onChange?: () => void;
   options: any;
 }
 
@@ -14,7 +14,7 @@ const SelectComponents = ({
   return (
     <>
       <div className="realtive">
-        <p className="pt-0 pr-2 pl-2 mt-3 mr-0 mb-2 ml-2 font-medium text-gray-600">
+        <p className="pt-0 pr-2 pl-2 absolute -mt-3 mr-0 mb-2 ml-2 font-medium text-gray-600 bg-white">
           {label}
         </p>
         <select
