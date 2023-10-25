@@ -1,16 +1,21 @@
 interface SelectComponents {
+  id: string;
   label: string;
   value?: string;
-  onChange?: () => void;
+  onChange: (value: string, label: string) => void;
   options: any;
 }
 
 const SelectComponents = ({
+  id,
   label,
   value,
   onChange,
   options,
 }: SelectComponents) => {
+  const onChangeValue = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    onChange(id, e.target.value);
+  };
   return (
     <>
       <div className="realtive">
@@ -23,7 +28,7 @@ const SelectComponents = ({
           //   id=""
           aria-label="State"
           value={value}
-          onChange={onChange}
+          onChange={onChangeValue}
         >
           {options && options.length ? (
             options.map((optionItem: any) => (

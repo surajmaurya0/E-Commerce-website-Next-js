@@ -1,7 +1,29 @@
+"use client";
+import { useState, useMemo } from "react";
 import InputComponents from "@/components/FormElements/InputComponents";
 import Link from "next/link";
-
+interface FormData {
+  [key: string]: string;
+}
 const Login = () => {
+  const [logInData, setLogInData] = useState<FormData>({
+    email: "",
+    password: "",
+  });
+  const onChangeLogin = (label: string, value: string) => {
+    setLogInData({ ...logInData, [label]: value });
+  };
+  const formDataNotEmpty = useMemo(() => {
+    const allValuesAreNonEmpty = Object.values(logInData).every(
+      (value) => value !== null && value !== ""
+    );
+    return !allValuesAreNonEmpty;
+  }, [logInData]);
+  const onLoginSubmit = () =>{
+    console.log(logInData);
+    
+  }
+  console.log(logInData);
   return (
     <>
       <div className="bg-white relative">
@@ -14,16 +36,26 @@ const Login = () => {
                 </p>
                 <div className="w-full mt-6 mr-0 mb-0 ml-0 relative space-y-8">
                   <InputComponents
+                    id={"email"}
                     type={"email"}
                     placeHolder={"Enter your email"}
                     label={"Email"}
+                    onChange={onChangeLogin}
                   />
                   <InputComponents
+                    id={"password"}
                     type={"password"}
                     placeHolder={"Enter your password"}
                     label={"Password"}
+                    onChange={onChangeLogin}
                   />
-                  <button className="inline-flex w-full items-center justify-center bg-black px-6 py-4  text-lg text-white transition-all duration-200 ease-in-out focus:shadow font-medium uppercase tracking-wide max-[500px]:text-base max-[500px]:p-3">
+                  <button
+                    className={`inline-flex w-full items-center justify-center ${
+                      formDataNotEmpty ? "bg-zinc-700" : "bg-black"
+                    } px-6 py-4  text-lg text-white transition-all duration-200 ease-in-out focus:shadow font-medium uppercase tracking-wide max-[500px]:text-base max-[500px]:p-3`}
+                    disabled={formDataNotEmpty}
+                    onClick={onLoginSubmit}
+                  >
                     Login
                   </button>
                 </div>

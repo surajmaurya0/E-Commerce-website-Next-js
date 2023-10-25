@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 //   useUnifiedTopology:boolean
 // }
 const configOptions:any = {
-  useNewUserParser: true,
+  useNewUrlParser: true,
   useUnifiedTopology: true,
 };
 const connectDB = async () => {

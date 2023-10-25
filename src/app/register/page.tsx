@@ -1,12 +1,45 @@
 "use client";
-
+import { useState, useMemo } from "react";
 import InputComponents from "@/components/FormElements/InputComponents";
 import SelectComponents from "@/components/FormElements/SelectComponents";
 import { registrationFormControls } from "@/utils";
 import Link from "next/link";
-
-const isRegistered = false;
+import { registerUser } from "@/services/register";
+interface FormData {
+  [key: string]: string;
+}
+// let isRegistered = false;
+const intialFormData = {
+  name: "",
+  email: "",
+  password: "",
+  role: "customer",
+};
 const Register = () => {
+  const [formData, setFormData] = useState<FormData>(intialFormData);
+  const [isRegistered, setIsRegistered] = useState<boolean>();
+  console.log(formData);
+  const onChangeFormData = (label: string, value: string) => {
+    setFormData({ ...formData, [label]: value });
+  };
+  console.log(formData);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const formDataNotEmpty = useMemo(() => {
+    const allValuesAreNonEmpty = Object.values(formData).every(
+      (value) => value !== null && value !== ""
+    );
+    return !allValuesAreNonEmpty;
+  }, [formData]);
+
+  console.log("formDataNotEmpty", formDataNotEmpty);
+  const handleRegisterSubmit = async () => {
+    const response = await registerUser(formData);
+    console.log(response);
+    if (response.success === true) {
+      setIsRegistered(true);
+    }
+  };
+
   return (
     <>
       <div className="bg-white relative">
@@ -21,7 +54,7 @@ const Register = () => {
                 </p>
                 {isRegistered ? (
                   <button className="inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg text-white transition-all duration-200 ease-in-out focus:shadow font-medium uppercase tracking-wide max-[500px]:text-base max-[500px]:p-3">
-                    Log in
+                    <Link href="/login">Log in</Link>
                   </button>
                 ) : (
                   <>
@@ -38,16 +71,31 @@ const Register = () => {
                           componentType === "input" ? (
                             <>
                               <InputComponents
+                                id={id}
                                 type={type}
                                 placeHolder={placeholder}
                                 label={label}
+                                onChange={onChangeFormData}
+                                value={formData[id]} //this not necessry
                               />
                             </>
                           ) : componentType === "select" ? (
-                            <SelectComponents label={label} options={options} />
+                            <SelectComponents
+                              label={label}
+                              options={options}
+                              onChange={onChangeFormData}
+                              value={formData.role}
+                              id={id}
+                            />
                           ) : null
                       )}
-                      <button className="inline-flex w-full items-center justify-center bg-black px-6 py-4  text-lg text-white transition-all duration-200 ease-in-out focus:shadow font-medium uppercase tracking-wide max-[500px]:text-base max-[500px]:p-3">
+                      <button
+                        className={`inline-flex w-full items-center justify-center ${
+                          formDataNotEmpty ? "bg-zinc-700" : "bg-black"
+                        } px-6 py-4  text-lg text-white transition-all duration-200 ease-in-out focus:shadow font-medium uppercase tracking-wide max-[500px]:text-base max-[500px]:p-3`}
+                        disabled={formDataNotEmpty}
+                        onClick={handleRegisterSubmit}
+                      >
                         Register
                       </button>
                     </div>

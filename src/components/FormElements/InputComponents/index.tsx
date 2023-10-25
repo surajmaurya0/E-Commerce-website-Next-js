@@ -1,18 +1,23 @@
 interface InputComponents {
+  id: string;
   label: string;
   placeHolder: string;
-  onChange?: () => void;
+  onChange: (label: string,value: string) => void;
   value?: string;
   type: string;
 }
 
 const InputComponents = ({
+  id,
   label,
   placeHolder,
   onChange,
   value,
   type,
 }: InputComponents) => {
+  const onChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(id,e.target.value);
+  };
   return (
     <>
       <div className="relative">
@@ -23,7 +28,7 @@ const InputComponents = ({
           placeholder={placeHolder}
           type={type || "text"}
           value={value}
-          onChange={onChange}
+          onChange={onChangeValue}
           className="border placeholder-gray-400 focus:outline-none focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mr-0 mt-0 ml-0 text-base block bg-white border-gray-300 rounded-md"
         />
       </div>
