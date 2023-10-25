@@ -3,7 +3,8 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import GlobalState from '@/context'
 import Navbar from '@/components/Navbar'
-
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -20,6 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+         <ToastContainer/>
         <GlobalState>
          <Navbar/>
          <main className='flex min-h-screen flex-col mt-[65px]'>{children}</main>

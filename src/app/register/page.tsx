@@ -5,6 +5,7 @@ import SelectComponents from "@/components/FormElements/SelectComponents";
 import { registrationFormControls } from "@/utils";
 import Link from "next/link";
 import { registerUser } from "@/services/register";
+import {toast} from 'react-toastify'
 interface FormData {
   [key: string]: string;
 }
@@ -37,6 +38,7 @@ const Register = () => {
     console.log(response);
     if (response.success === true) {
       setIsRegistered(true);
+      toast.success(response.message)
     }
   };
 
