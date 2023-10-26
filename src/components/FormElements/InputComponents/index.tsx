@@ -20,7 +20,7 @@ const InputComponents = ({
   };
   return (
     <>
-      <div className="relative">
+      <div className="relative" key={id}>
         <p className="pt-0 pr-2 absolute pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 bg-white">
           {label}
         </p>

@@ -55,9 +55,11 @@ const Register = () => {
                     : " Sign up for an account"}
                 </p>
                 {isRegistered ? (
+                   <Link href="/login">
                   <button className="inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg text-white transition-all duration-200 ease-in-out focus:shadow font-medium uppercase tracking-wide max-[500px]:text-base max-[500px]:p-3">
-                    <Link href="/login">Log in</Link>
+                   Log in
                   </button>
+                  </Link>
                 ) : (
                   <>
                     <div className="w-full mt-6 mr-0 mb-0 ml-0 relative space-y-8">
@@ -103,9 +105,11 @@ const Register = () => {
                     </div>
                     <div className="w-full mt-6">
                       <p>Already have a account ?</p>
+                      <Link href="/login">
                       <button className="mt-[3px] inline-flex w-full items-center justify-center bg-black px-5 py-3  text-lg text-white transition-all duration-200 ease-in-out focus:shadow font-medium uppercase tracking-wide max-[500px]:text-base max-[500px]:p-3">
-                        <Link href="/login">Login</Link>
+                        Login
                       </button>
+                      </Link>
                     </div>
                   </>
                 )}

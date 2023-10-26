@@ -1,10 +1,44 @@
-"use client"
-import { createContext, useState } from "react";
+"use client";
+import { createContext, useEffect, useState } from "react";
+import Cookies from "js-cookie";
+export const GlobalContext = createContext<any>(null);
 
-export const GlobalContext = createContext<any>(null)
-
-export default function GlobalState ({children}:any){
-    const [showNavModal,setShowNavModal] = useState<boolean>(false)
-    return <GlobalContext.Provider value={{showNavModal,setShowNavModal}} >{children}</GlobalContext.Provider>
-    
+export default function GlobalState({ children }: any) {
+  const [showNavModal, setShowNavModal] = useState<boolean>(false);
+  // const [cookiesData, setCookiesData] = useState<any>(Cookies.get("token"));
+  const [commonLoader, setCommonLoader] = useState<boolean>(false);
+  const [isAuthUser, setIsAuthUser] = useState<boolean>(false);
+  const [user, setUser] = useState<any>();
+  const [isAdminView, setIsAdminView] = useState(Boolean);
+  useEffect(() => {
+    console.log(Cookies.get("token"));
+    if (Cookies.get("token") !== undefined) {
+      setIsAuthUser(true);
+      const userDataStr = localStorage.getItem("user");
+      const userData = userDataStr ? JSON.parse(userDataStr) : {};
+      setIsAdminView(userData.role === "admin" ? true : false);
+      setUser(userData);
+    } else {
+      setIsAdminView(false);
+      setIsAuthUser(false);
+    }
+  }, [Cookies]);
+  return (
+    <GlobalContext.Provider
+      value={{
+        showNavModal,
+        setShowNavModal,
+        commonLoader,
+        setCommonLoader,
+        isAuthUser,
+        setIsAuthUser,
+        user,
+        setUser,
+        isAdminView,
+        setIsAdminView,
+      }}
+    >
+      {children}
+    </GlobalContext.Provider>
+  );
 }
