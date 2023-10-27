@@ -1,14 +1,13 @@
 "use client";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useContext } from "react";
 import InputComponents from "@/components/FormElements/InputComponents";
 import SelectComponents from "@/components/FormElements/SelectComponents";
 import { registrationFormControls } from "@/utils";
 import Link from "next/link";
 import { registerUser } from "@/services/register";
-import {toast} from 'react-toastify'
-interface FormData {
-  [key: string]: string;
-}
+import { toast } from "react-toastify";
+import { GlobalContext } from "@/context";
+import { FormDataI } from "@/Interface";
 // let isRegistered = false;
 const intialFormData = {
   name: "",
@@ -17,29 +16,31 @@ const intialFormData = {
   role: "customer",
 };
 const Register = () => {
-  const [formData, setFormData] = useState<FormData>(intialFormData);
+  const [formData, setFormData] = useState<FormDataI>(intialFormData);
   const [isRegistered, setIsRegistered] = useState<boolean>();
-  console.log(formData);
+  const { setIsLoading } = useContext(GlobalContext);
   const onChangeFormData = (label: string, value: string) => {
     setFormData({ ...formData, [label]: value });
   };
-  console.log(formData);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
   const formDataNotEmpty = useMemo(() => {
     const allValuesAreNonEmpty = Object.values(formData).every(
       (value) => value !== null && value !== ""
     );
     return !allValuesAreNonEmpty;
   }, [formData]);
-
-  console.log("formDataNotEmpty", formDataNotEmpty);
   const handleRegisterSubmit = async () => {
+    setIsLoading(true);
     const response = await registerUser(formData);
     console.log(response);
-    if (response.success === true) {
-      setIsRegistered(true);
-      toast.success(response.message)
+    if (response.success === false) {
+    setIsLoading(false);
+      return toast.dismiss(response.message);
     }
+    setIsRegistered(true);
+    toast.success(response.message);
+    setIsLoading(false);
+    setFormData(intialFormData);
   };
 
   return (
@@ -55,10 +56,10 @@ const Register = () => {
                     : " Sign up for an account"}
                 </p>
                 {isRegistered ? (
-                   <Link href="/login">
-                  <button className="inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg text-white transition-all duration-200 ease-in-out focus:shadow font-medium uppercase tracking-wide max-[500px]:text-base max-[500px]:p-3">
-                   Log in
-                  </button>
+                  <Link href="/login">
+                    <button className="inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg text-white transition-all duration-200 ease-in-out focus:shadow font-medium uppercase tracking-wide max-[500px]:text-base max-[500px]:p-3">
+                      Log in
+                    </button>
                   </Link>
                 ) : (
                   <>
@@ -106,9 +107,9 @@ const Register = () => {
                     <div className="w-full mt-6">
                       <p>Already have a account ?</p>
                       <Link href="/login">
-                      <button className="mt-[3px] inline-flex w-full items-center justify-center bg-black px-5 py-3  text-lg text-white transition-all duration-200 ease-in-out focus:shadow font-medium uppercase tracking-wide max-[500px]:text-base max-[500px]:p-3">
-                        Login
-                      </button>
+                        <button className="mt-[3px] inline-flex w-full items-center justify-center bg-black px-5 py-3  text-lg text-white transition-all duration-200 ease-in-out focus:shadow font-medium uppercase tracking-wide max-[500px]:text-base max-[500px]:p-3">
+                          Login
+                        </button>
                       </Link>
                     </div>
                   </>

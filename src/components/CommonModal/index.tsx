@@ -1,15 +1,7 @@
 import { Fragment } from "react";
 
 import { Transition, Dialog } from "@headlessui/react";
-interface CommonModalInterface {
-  modalTitle?: any;
-  mainContent?: any;
-  showbutton?: any;
-  buttonComponents?: any;
-  show?: boolean;
-  setShow?: any;
-  showModalTitle?: boolean;
-}
+import {  CommonModalInterfaceI } from "@/Interface";
 const CommonModal = ({
   modalTitle,
   mainContent,
@@ -18,7 +10,7 @@ const CommonModal = ({
   show,
   setShow,
   showModalTitle,
-}: CommonModalInterface) => {
+}: CommonModalInterfaceI) => {
   return (
     <>
       <Transition.Root as={Fragment} show={show}>

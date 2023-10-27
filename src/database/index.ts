@@ -1,8 +1,5 @@
 import mongoose from "mongoose";
-// interface configOptionsI{
-//   useNewUserParser:boolean,
-//   useUnifiedTopology:boolean
-// }
+
 const configOptions:any = {
   useNewUrlParser: true,
   useUnifiedTopology: true,

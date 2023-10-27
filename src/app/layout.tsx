@@ -5,6 +5,7 @@ import GlobalState from '@/context'
 import Navbar from '@/components/Navbar'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import LoadingPage from '@/components/Loading'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -24,7 +25,8 @@ export default function RootLayout({
          <ToastContainer/>
         <GlobalState>
          <Navbar/>
-         <main className='flex min-h-screen flex-col mt-[65px]'>{children}</main>
+         <LoadingPage/>
+         <main className='flex flex-col mt-[65px]'>{children}</main>
         </GlobalState>
         </body>
     </html>

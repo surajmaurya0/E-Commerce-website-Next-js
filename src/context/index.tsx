@@ -5,7 +5,7 @@ export const GlobalContext = createContext<any>(null);
 
 export default function GlobalState({ children }: any) {
   const [showNavModal, setShowNavModal] = useState<boolean>(false);
-  // const [cookiesData, setCookiesData] = useState<any>(Cookies.get("token"));
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [commonLoader, setCommonLoader] = useState<boolean>(false);
   const [isAuthUser, setIsAuthUser] = useState<boolean>(false);
   const [user, setUser] = useState<any>();
@@ -36,6 +36,8 @@ export default function GlobalState({ children }: any) {
         setUser,
         isAdminView,
         setIsAdminView,
+        isLoading,
+        setIsLoading,
       }}
     >
       {children}

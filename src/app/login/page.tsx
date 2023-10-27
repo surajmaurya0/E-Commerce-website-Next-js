@@ -7,17 +7,22 @@ import { toast } from "react-toastify";
 import { GlobalContext } from "@/context";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
-interface FormData {
-  [key: string]: string;
-}
+import { FormDataI } from "@/Interface";
 const intialState = {
   email: "",
   password: "",
 };
 const Login = () => {
-  const [logInData, setLogInData] = useState<FormData>(intialState);
-  const { isAuthUser, setIsAuthUser, user, setUser,setIsAdminView } =useContext(GlobalContext);
-   const router = useRouter()
+  const [logInData, setLogInData] = useState<FormDataI>(intialState);
+  const {
+    isAuthUser,
+    setIsAuthUser,
+    user,
+    setUser,
+    setIsAdminView,
+    setIsLoading,
+  } = useContext(GlobalContext);
+  const router = useRouter();
   const onChangeLogin = (label: string, value: string) => {
     setLogInData({ ...logInData, [label]: value });
   };
@@ -30,11 +35,13 @@ const Login = () => {
   }, [logInData]);
 
   const onLoginSubmit = async () => {
+    setIsLoading(true);
     const res = await logIn(logInData);
-    console.log(res);
+    console.log("resresresresresresresresres",res);
     const { success, data, message } = res;
     if (!success) {
-      setIsAuthUser(false)
+      setIsAuthUser(false);
+      setIsLoading(false);
       return toast.error(message);
     }
     //if res.success is success
@@ -44,10 +51,10 @@ const Login = () => {
     setLogInData(intialState);
     Cookies.set("token", data?.token);
     localStorage.setItem("user", JSON.stringify(data?.user));
-    setIsAdminView(data?.user.role === 'admin' ? true :false)
-    
+    setIsAdminView(data?.user.role === "admin" ? true : false);
+    setIsLoading(false);
   };
-  console.log(isAuthUser,user);
+  console.log(isAuthUser, user);
 
   useEffect(() => {
     if (isAuthUser) router.push("/");

@@ -1,18 +1,12 @@
-interface SelectComponents {
-  id: string;
-  label: string;
-  value?: string;
-  onChange: (value: string, label: string) => void;
-  options: any;
-}
 
+import {SelectComponentsI} from '@/Interface'
 const SelectComponents = ({
   id,
   label,
   value,
   onChange,
   options,
-}: SelectComponents) => {
+}: SelectComponentsI) => {
   const onChangeValue = (e: React.ChangeEvent<HTMLSelectElement>) => {
     onChange(id, e.target.value);
   };

@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.loading-z_index_value{
+    z-index: 111;
+}
+
+/* Change the scrollbar color for Webkit-based browsers */
+/* This affects the thumb (the draggable part) */
+::-webkit-scrollbar-thumb {
+    background-color: #3F3F46;
+    border-radius:50px
+
+}
+  
+  /* This affects the track (the background) */
+  ::-webkit-scrollbar {
+    width: 5px; /* Change the scrollbar width */
+    height: 10px;
+  }
+  
+  /* For Firefox */
+  /* These selectors might work in future versions of Firefox. Be sure to check for compatibility in your target browsers. */
+  scrollbar-color: gray; /* Change the thumb and track color for Firefox */
+  scrollbar-width: thin; /* Change the scrollbar width for Firefox */
+  

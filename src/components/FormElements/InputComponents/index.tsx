@@ -1,11 +1,5 @@
-interface InputComponents {
-  id: string;
-  label: string;
-  placeHolder: string;
-  onChange: (label: string,value: string) => void;
-  value?: string;
-  type: string;
-}
+import { InputComponentsI } from "@/Interface";
+
 
 const InputComponents = ({
   id,
@@ -14,7 +8,7 @@ const InputComponents = ({
   onChange,
   value,
   type,
-}: InputComponents) => {
+}: InputComponentsI) => {
   const onChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(id,e.target.value);
   };
