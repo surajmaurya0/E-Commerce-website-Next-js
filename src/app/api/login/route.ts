@@ -4,16 +4,18 @@ import { compare } from "bcryptjs";
 import Joi from "joi";
 import { NextResponse } from "next/server";
 import jwt  from 'jsonwebtoken'
+// import { NextApiRequest, NextApiResponse } from "next";
 
 
 const schmea = Joi.object({
     email:Joi.string().email().required(),
     password:Joi.string().required()
 })
-export const POST =async(req:any)=>{
+export const POST =async(req: Request)=>{
     await connectDB();
     const {email,password} = await req.json()
     const {error} = schmea.validate({email,password})
+    // res.status(200).json(email);
     if(error){
         return NextResponse.json({
             success:false,

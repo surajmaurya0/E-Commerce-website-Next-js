@@ -7,13 +7,13 @@ import { toast } from "react-toastify";
 import { GlobalContext } from "@/context";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
-import { FormDataI } from "@/Interface";
+import {LoginFormInputI } from "@/Interface";
 const intialState = {
   email: "",
   password: "",
 };
 const Login = () => {
-  const [logInData, setLogInData] = useState<FormDataI>(intialState);
+  const [logInData, setLogInData] = useState<LoginFormInputI>(intialState);
   const {
     isAuthUser,
     setIsAuthUser,

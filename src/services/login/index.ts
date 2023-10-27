@@ -1,4 +1,6 @@
-export const logIn = async(formData:any) =>{
+import { LoginFormInputI } from "@/Interface"
+
+export const logIn = async(formData:LoginFormInputI) =>{
     try {
         const response = await fetch('/api/login',{
             method:'POST',

@@ -1,5 +1,5 @@
 "use client";
-import { useState, useMemo, useContext } from "react";
+import { useState, useMemo, useContext, useCallback } from "react";
 import InputComponents from "@/components/FormElements/InputComponents";
 import SelectComponents from "@/components/FormElements/SelectComponents";
 import { registrationFormControls } from "@/utils";
@@ -7,8 +7,7 @@ import Link from "next/link";
 import { registerUser } from "@/services/register";
 import { toast } from "react-toastify";
 import { GlobalContext } from "@/context";
-import { FormDataI } from "@/Interface";
-// let isRegistered = false;
+import { RegistrationFormInputI,RegistrationFormDataI } from "@/Interface";
 const intialFormData = {
   name: "",
   email: "",
@@ -16,12 +15,16 @@ const intialFormData = {
   role: "customer",
 };
 const Register = () => {
-  const [formData, setFormData] = useState<FormDataI>(intialFormData);
+  const [formData, setFormData] =
+    useState<RegistrationFormDataI>(intialFormData);
   const [isRegistered, setIsRegistered] = useState<boolean>();
   const { setIsLoading } = useContext(GlobalContext);
-  const onChangeFormData = (label: string, value: string) => {
-    setFormData({ ...formData, [label]: value });
-  };
+  const onChangeFormData = useCallback(
+    (label: string, value: string) => {
+      setFormData({ ...formData, [label]: value });
+    },
+    [formData]
+  );
 
   const formDataNotEmpty = useMemo(() => {
     const allValuesAreNonEmpty = Object.values(formData).every(
@@ -29,19 +32,19 @@ const Register = () => {
     );
     return !allValuesAreNonEmpty;
   }, [formData]);
-  const handleRegisterSubmit = async () => {
+  const handleRegisterSubmit = useCallback(async () => {
     setIsLoading(true);
     const response = await registerUser(formData);
     console.log(response);
     if (response.success === false) {
-    setIsLoading(false);
+      setIsLoading(false);
       return toast.dismiss(response.message);
     }
     setIsRegistered(true);
     toast.success(response.message);
     setIsLoading(false);
     setFormData(intialFormData);
-  };
+  }, [formData, setIsLoading]);
 
   return (
     <>
@@ -72,7 +75,7 @@ const Register = () => {
                           label,
                           componentType,
                           options,
-                        }: any) =>
+                        }: RegistrationFormInputI) =>
                           componentType === "input" ? (
                             <>
                               <InputComponents
@@ -81,7 +84,7 @@ const Register = () => {
                                 placeHolder={placeholder}
                                 label={label}
                                 onChange={onChangeFormData}
-                                value={formData[id]} //this not necessry
+                                // value={formData[id]} //this not necessry
                               />
                             </>
                           ) : componentType === "select" ? (

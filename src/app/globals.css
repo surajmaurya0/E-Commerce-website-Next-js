@@ -18,9 +18,3 @@
     width: 5px; /* Change the scrollbar width */
     height: 10px;
   }
-  
-  /* For Firefox */
-  /* These selectors might work in future versions of Firefox. Be sure to check for compatibility in your target browsers. */
-  scrollbar-color: gray; /* Change the thumb and track color for Firefox */
-  scrollbar-width: thin; /* Change the scrollbar width for Firefox */
-  

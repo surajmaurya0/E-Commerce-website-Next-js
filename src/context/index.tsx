@@ -1,17 +1,19 @@
 "use client";
-import { createContext, useEffect, useState } from "react";
+import { ReactNode, createContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import { UserDataI } from "@/Interface";
 export const GlobalContext = createContext<any>(null);
-
-export default function GlobalState({ children }: any) {
+interface GlobalStateProps {
+  children: ReactNode;
+}
+export default function GlobalState({ children }: GlobalStateProps) {
   const [showNavModal, setShowNavModal] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [commonLoader, setCommonLoader] = useState<boolean>(false);
   const [isAuthUser, setIsAuthUser] = useState<boolean>(false);
-  const [user, setUser] = useState<any>();
+  const [user, setUser] = useState<UserDataI>();
   const [isAdminView, setIsAdminView] = useState(Boolean);
   useEffect(() => {
-    console.log(Cookies.get("token"));
     if (Cookies.get("token") !== undefined) {
       setIsAuthUser(true);
       const userDataStr = localStorage.getItem("user");
@@ -22,7 +24,7 @@ export default function GlobalState({ children }: any) {
       setIsAdminView(false);
       setIsAuthUser(false);
     }
-  }, [Cookies]);
+  }, []);
   return (
     <GlobalContext.Provider
       value={{

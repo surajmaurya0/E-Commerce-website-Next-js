@@ -1,5 +1,4 @@
-
-import {SelectComponentsI} from '@/Interface'
+import { SelectComponentsI } from "@/Interface";
 const SelectComponents = ({
   id,
   label,
@@ -18,20 +17,15 @@ const SelectComponents = ({
         </p>
         <select
           className="border placeholder-gray-400 focus:outline-none focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mr-0 mt-0 ml-0 text-base block bg-white border-gray-300 rounded"
-          // name=""
-          //   id=""
+      
           aria-label="State"
           value={value}
           onChange={onChangeValue}
         >
           {options && options.length ? (
-            options.map((optionItem: any) => (
-              <option
-                key={optionItem.id}
-                value={optionItem.id}
-                id={optionItem.id}
-              >
-                {optionItem.label}
+            options.map(({ id, label}: any) => (
+              <option key={id} value={id} id={id}>
+                {label}
               </option>
             ))
           ) : (

@@ -1,4 +1,6 @@
-export const registerUser = async (formData:any)=>{
+import { RegistrationFormDataI } from "@/Interface"
+
+export const registerUser = async (formData:RegistrationFormDataI)=>{
   try{
     const response = await fetch('/api/register',{
         method:'POST',

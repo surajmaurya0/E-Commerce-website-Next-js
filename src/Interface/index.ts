@@ -1,14 +1,21 @@
+import React, { SetStateAction } from "react";
+
 export interface FormDataI {
     [key: string]: string;
 }
-
+export interface RegistrationFormDataI  {
+  name: string
+  email:string
+  password:string
+  role:string
+};
 export interface CommonModalInterfaceI {
-    modalTitle?: any;
-    mainContent?: any;
-    showbutton?: any;
-    buttonComponents?: any;
+    modalTitle?: string;
+    mainContent?:  any;
+    showbutton?: boolean;
+    buttonComponents?: boolean;
     show?: boolean;
-    setShow?: any;
+    setShow?:any;
     showModalTitle?: boolean;
   }
   export interface InputComponentsI {
@@ -31,14 +38,43 @@ export interface CommonModalInterfaceI {
 //   useUnifiedTopology:boolean
 // }
 
-//down code is waste
-export interface ApiLoginI {
+// export interface ApiLoginI {
+//   email:string,
+//   password:string
+// }
+// export interface ApiRegisterI {
+//   name:string,
+//   email:string,
+//   password:string,
+//   role:string
+// }
+
+
+export interface RegistrationFormInputI {
+  id: string
+  type: string
+  placeholder: string
+  label: string
+  componentType: string
+  options?:any //getting error when using OptionI 
+}
+export interface LoginFormInputI {
   email:string,
   password:string
 }
-export interface ApiRegisterI {
-  name:string,
-  email:string,
-  password:string,
-  role:string
+export interface OptionI {
+  id: string
+  label: string
+}
+export interface NavbarMenuI {
+  id:string,
+  label:string,
+  path:string
+
+}
+export interface UserDataI {
+  email: string
+  name: string
+  role: string
+  _id: string
 }

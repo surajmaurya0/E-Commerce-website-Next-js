@@ -3,7 +3,7 @@ import User from "@/models/user";
 import Joi from "joi";
 import { NextResponse } from "next/server";
 import { hash } from "bcryptjs";
-import { ApiRegisterI } from "@/Interface";
+// import { ApiRegisterI } from "@/Interface";
 import { NextApiRequest } from "next";
 
 const schema = Joi.object({
@@ -13,9 +13,9 @@ const schema = Joi.object({
     role:Joi.string().required()
 })
 export const dynamic =  'force-dynamic'
-export async function POST(req:NextApiRequest){
+export async function POST(req:Request){
     await connectDB();
-    const {name,email,password,role} = await req.body()
+    const {name,email,password,role} = await req.json()
     //validate the schema
     const {error} = schema.validate({name,email,password,role})
     if(error){

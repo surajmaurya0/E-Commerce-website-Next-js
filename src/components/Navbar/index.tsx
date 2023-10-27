@@ -1,5 +1,5 @@
 "use client";
-import { Fragment, useCallback, useContext, useEffect, useMemo } from "react";
+import { Fragment, useCallback, useContext, } from "react";
 import { adminNavOptions, navOptions, styles } from "@/utils";
 import { GlobalContext } from "@/context";
 import CommonModal from "../CommonModal";
@@ -7,12 +7,10 @@ import Link from "next/link";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { NavbarMenuI } from "@/Interface";
 
 // const isAdminView = false;
 // const {isAuthUser} = false;
-const user = {
-  role: "admin",
-};
 
 const Navbar = () => {
   const { showNavModal, setShowNavModal, isAdminView, setIsAdminView } =
@@ -32,7 +30,7 @@ const Navbar = () => {
         id="nav-items"
       >
         <ul className="flex flex-col p-4 md:p-0 nt-4 font-medium border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 bg-white">
-          {item.map(({ id, label, path }: any) => (
+          {item.map(({ id, label, path }: NavbarMenuI) => (
             <li
               className="cursor-pointer block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0"
               key={id}
@@ -44,14 +42,14 @@ const Navbar = () => {
       </div>
     );
   }
-  const HandleLogoutBtn = () => {
+  const HandleLogoutBtn = useCallback(() => {
     setIsAuthUser(false);
     setUser(null);
     Cookies.remove("token");
     localStorage.removeItem("user");
     toast.warn("Logout from Website");
     router.push("/");
-  };
+  },[router, setIsAuthUser,setUser])
 
   return (
     <>
