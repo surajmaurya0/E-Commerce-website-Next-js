@@ -1,5 +1,5 @@
 "use client";
-import { useState, useMemo, useContext, useCallback } from "react";
+import { useState, useMemo, useContext, useCallback,useEffect } from "react";
 import InputComponents from "@/components/FormElements/InputComponents";
 import SelectComponents from "@/components/FormElements/SelectComponents";
 import { registrationFormControls } from "@/utils";
@@ -8,6 +8,7 @@ import { registerUser } from "@/services/register";
 import { toast } from "react-toastify";
 import { GlobalContext } from "@/context";
 import { RegistrationFormInputI,RegistrationFormDataI } from "@/Interface";
+import { useRouter } from "next/navigation";
 const intialFormData = {
   name: "",
   email: "",
@@ -15,10 +16,10 @@ const intialFormData = {
   role: "customer",
 };
 const Register = () => {
-  const [formData, setFormData] =
-    useState<RegistrationFormDataI>(intialFormData);
+  const [formData, setFormData] = useState<RegistrationFormDataI>(intialFormData);
   const [isRegistered, setIsRegistered] = useState<boolean>();
-  const { setIsLoading } = useContext(GlobalContext);
+  const { setIsLoading,isAuthUser } = useContext(GlobalContext);
+  const router = useRouter()
   const onChangeFormData = useCallback(
     (label: string, value: string) => {
       setFormData({ ...formData, [label]: value });
@@ -45,7 +46,9 @@ const Register = () => {
     setIsLoading(false);
     setFormData(intialFormData);
   }, [formData, setIsLoading]);
-
+  useEffect(()=>{
+    if(isAuthUser) router.push('/')
+  },[isAuthUser,router])
   return (
     <>
       <div className="bg-white relative">

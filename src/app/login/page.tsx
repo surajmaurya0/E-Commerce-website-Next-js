@@ -58,7 +58,7 @@ const Login = () => {
 
   useEffect(() => {
     if (isAuthUser) router.push("/");
-  }, [isAuthUser]);
+  }, [isAuthUser,router]);
   return (
     <>
       <div className="bg-white relative">

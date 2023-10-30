@@ -42,7 +42,7 @@ export const POST =async(req: Request)=>{
             id:checkUser._id,
             email:checkUser?.email,
             role:checkUser?.role
-        },'default_secret_key',{expiresIn:'1d'})
+        },'default_secret_key',{expiresIn:'7d'})
         const finalData = {
             token,
             user:{

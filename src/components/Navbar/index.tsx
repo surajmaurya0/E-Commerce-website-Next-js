@@ -6,18 +6,17 @@ import CommonModal from "../CommonModal";
 import Link from "next/link";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { NavbarMenuI } from "@/Interface";
 
 // const isAdminView = false;
 // const {isAuthUser} = false;
 
 const Navbar = () => {
-  const { showNavModal, setShowNavModal, isAdminView, setIsAdminView } =
-    useContext(GlobalContext);
-  const { isAuthUser, setIsAuthUser, user, setUser } =
-    useContext(GlobalContext);
+  const { showNavModal, setShowNavModal,isAuthUser, setIsAuthUser, user, setUser } =useContext(GlobalContext);
   console.log(user);
+  const pathName = usePathname()
+  const isAdminView = pathName.includes('admin-view')
   const router = useRouter();
   function NavItem({ isModalView = false }: any) {
     const item = isAuthUser && isAdminView ? adminNavOptions : navOptions;
@@ -34,6 +33,7 @@ const Navbar = () => {
             <li
               className="cursor-pointer block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0"
               key={id}
+              onClick={() => router.push(path)}
             >
               {label}
             </li>
@@ -75,14 +75,14 @@ const Navbar = () => {
               isAdminView ? (
                 <button
                   className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
-                  onClick={() => setIsAdminView(false)}
+                  onClick={() => router.push("/")}
                 >
                   Client View
                 </button>
               ) : (
                 <button
                   className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
-                  onClick={() => setIsAdminView(true)}
+                  onClick={() => router.push("/admin-view")}
                 >
                   Admin View
                 </button>
