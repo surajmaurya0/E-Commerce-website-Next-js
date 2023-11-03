@@ -22,7 +22,7 @@ const AddProducts = () => {
       console.log("reader", reader);
 
       reader.onload = (e: any) => {
-        setSelectedImage(e.target.result);
+        setSelectedImage({ name: file.name, base64: e.target.result });
       };
 
       reader.readAsDataURL(file);
@@ -38,11 +38,13 @@ const AddProducts = () => {
 
   const handleFileInputChange = (e: any) => {
     const file = e.target.files[0];
+    console.log("file", file.name);
+
     if (file) {
       const reader = new FileReader();
 
       reader.onload = (e: any) => {
-        setSelectedImage(e.target.result);
+        setSelectedImage({ name: file.name, base64: e.target.result });
       };
 
       reader.readAsDataURL(file);
@@ -55,19 +57,19 @@ const AddProducts = () => {
       <div className="w-full mt-5 mr-0 mb-0 ml-0 relative px-2">
         <div className="felx felx-col items-start justify-start bg-white rounded-xl relative">
           <div className="w-full mt-6 mr-0 mb-0 ml-0 space-y-8 justify-center items-center flex flex-col">
-            <div className="">
+            <div className="md:w-3/4">
               <div
                 onDrop={handleDrop}
                 onDragOver={(e) => e.preventDefault()}
                 //   style={dropzoneStyle}
-                className="border-2 border-dashed rounded-lg overflow-hidden text-center cursor-pointer max-w-md h-72"
+                className="m-auto border-2 border-dashed rounded-lg overflow-hidden text-center cursor-pointer max-w-md h-72"
                 onClick={
                   selectedImage ? () => {} : () => fileInputRef.current.click()
                 }
               >
                 {selectedImage && (
                   <div
-                    className="absolute h-[25px] w-[25px] bg-red-500 text-white rounded-full"
+                    className="absolute h-[25px] w-[25px] bg-red-500 text-gray-800 rounded-full"
                     onClick={() => setSelectedImage(null)}
                   >
                     <button className="">x</button>
@@ -85,7 +87,7 @@ const AddProducts = () => {
                   <div>
                     {/* <h2>Selected Image</h2> */}
                     <Image
-                      src={selectedImage}
+                      src={selectedImage.base64}
                       alt="Selected Image"
                       // style={imageStyle}
                       width={500}
@@ -101,12 +103,26 @@ const AddProducts = () => {
                   </p>
                 )}
               </div>
+              {selectedImage && (
+                <div className="text-center">
+                  <span className="text-gray-400 text-xs ml-1">
+                    {selectedImage?.name}
+                  </span>
+                </div>
+              )}
               <div className="flex gap-2 mt-3 flex-col items-start">
                 <label className="font-semibold">Available size</label>
                 <TileComponents data={AvailbleSize} />
               </div>
               {productControl.map(
-                ({ type, placeholder, id, componentType, options,label }: any) =>
+                ({
+                  type,
+                  placeholder,
+                  id,
+                  componentType,
+                  options,
+                  label,
+                }: any) =>
                   componentType === "input" ? (
                     <>
                       <InputComponents
@@ -119,14 +135,16 @@ const AddProducts = () => {
                     </>
                   ) : componentType === "select" ? (
                     <SelectComponents
-                    options={options}
+                      options={options}
                       id={id}
                       onClick={() => {}}
                     />
                   ) : null
               )}
+              <button className="mt-5 inline-flex w-full items-center justify-center bg-black px-2 py-2 text-lg text-white font-medium uppercase tracking-wide ">
+                add product
+              </button>
             </div>
-            0
           </div>
         </div>
       </div>
