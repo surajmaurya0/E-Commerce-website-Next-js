@@ -18,3 +18,7 @@
     width: 5px; /* Change the scrollbar width */
     height: 10px;
   }
+  img{
+    width:500px;
+    height:288px !important
+  }

@@ -11,7 +11,7 @@ const SelectComponents = ({
   };
   return (
     <>
-      <div className="realtive">
+      <div className="realtive mt-5">
         <p className="pt-0 pr-2 pl-2 absolute -mt-3 mr-0 mb-2 ml-2 font-medium text-gray-600 bg-white">
           {label}
         </p>

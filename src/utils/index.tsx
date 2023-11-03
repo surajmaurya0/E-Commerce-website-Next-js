@@ -83,3 +83,130 @@ export const registrationFormControls = [
     ],
   },
 ];
+export const AvailbleSize = [
+  {
+    id: "s",
+    label: "S",
+  },
+  {
+    id: "m",
+    label: "M",
+  },
+  {
+    id: "l",
+    label: "L",
+  },
+];
+export const AdminAddProductFormControls = [
+  {
+    id: "name",
+    type: "text",
+    placeholder: "Enter Name",
+    label: "Name",
+    componentType: "input",
+  },
+  {
+    id: "price",
+    type: "number",
+    placeholder: "Enter price",
+    label: "Price",
+    componentType: "input",
+  },
+  {
+    id: "descriptin",
+    type: "text",
+    placeholder: "Enter description",
+    label: "Description",
+    componentType: "input",
+  },
+  {
+    id: "category",
+    type: "",
+    placeholder: "",
+    label: "Category",
+    componentType: "select",
+    options: [
+      {
+        id: "men",
+        label: "Men",
+      },
+      {
+        id: "women",
+        label: "Women",
+      },
+      {
+        id: "kids",
+        label: "Kids",
+      },
+    ],
+  },
+  {
+    id: "deliveryInfo",
+    type: "text",
+    placeholder: "Enter deliveryInfo",
+    label: "Delivery Info",
+    componentType: "input",
+  },
+  {
+    id: "onSale",
+    type: "",
+    placeholder: "",
+    label: "On Sale",
+    componentType: "select",
+    options: [
+      {
+        id: "yes",
+        label: "yes",
+      },
+      {
+        id: "no",
+        label: "No",
+      },
+    ],
+  },
+  {
+    id: "priceDrop",
+    type: "number",
+    placeholder: "Enter Price Drop",
+    label: "Price Drop",
+    componentType: "input",
+  },
+];
+
+export const addNewAddressFormControl = [
+  {
+    id: "fullname",
+    type: "input",
+    placeholder: "Enter your full name",
+    label: "Full Name",
+    componentType: "input",
+  },
+  {
+    id: "address",
+    type: "input",
+    placeholder: "Enter your full address",
+    label: "Address",
+    componentType: "input",
+  },
+  {
+    id: "city",
+    type: "input",
+    placeholder: "Enter your city",
+    label: "City",
+    componentType: "input",
+  },
+  {
+    id: "country",
+    type: "input",
+    placeholder: "Enter your country",
+    label: "Country",
+    componentType: "input",
+  },
+  {
+    id: "postalCode",
+    type: "input",
+    placeholder: "Enter your postal code",
+    label: "Postal Code",
+    componentType: "input",
+  },
+];
