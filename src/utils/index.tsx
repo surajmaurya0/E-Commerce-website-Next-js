@@ -113,7 +113,7 @@ export const AdminAddProductFormControls = [
     componentType: "input",
   },
   {
-    id: "descriptin",
+    id: "description",
     type: "text",
     placeholder: "Enter description",
     label: "Description",
@@ -210,3 +210,14 @@ export const addNewAddressFormControl = [
     componentType: "input",
   },
 ];
+export const firebaseConfig = {
+  apiKey: "AIzaSyC-rjrm5EmoL2i-hL0J2VQpk8O2OPzt9BE",
+  authDomain: "next-js-ecommerce-375d5.firebaseapp.com",
+  projectId: "next-js-ecommerce-375d5",
+  storageBucket: "next-js-ecommerce-375d5.appspot.com",
+  messagingSenderId: "776385594693",
+  appId: "1:776385594693:web:98a7be24a9479ebbefea2c",
+  measurementId: "G-LB252LRNMK"
+};
+
+export const firebaseStorageURL= 'gs://next-js-ecommerce-375d5.appspot.com'
