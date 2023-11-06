@@ -7,7 +7,7 @@ import {
   AdminAddProductFormControls as productControl,
 } from "@/utils";
 import Image from "next/image";
-import { useRef, useState, useCallback, useMemo } from "react";
+import { useRef, useState, useCallback, useMemo, useContext } from "react";
 import TileComponents from "@/components/TileComponent";
 import InputComponents from "@/components/FormElements/InputComponents";
 import SelectComponents from "@/components/FormElements/SelectComponents";
@@ -18,6 +18,10 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
+import { addNewProduct } from "@/services/product";
+import { toast } from "react-toastify";
+import { GlobalContext } from "@/context";
+import { useRouter } from "next/navigation";
 
 const app = initializeApp(firebaseConfig);
 
@@ -37,7 +41,9 @@ const initialFormData = {
 
 const AddProducts = () => {
   const [formData, setFormData] = useState<any>(initialFormData);
-  const { imageUrl, name: imageName } = formData;
+  const{setIsLoading} = useContext(GlobalContext)
+  const router = useRouter()
+  const { imageUrl} = formData;
   const fileInputRef = useRef<any>(null);
   const formDataNotEmpty = useMemo(() => {
     const btnClick = Object.values(formData).every((data: any) => data !== "");
@@ -122,6 +128,20 @@ const AddProducts = () => {
       sizes: cpySizes,
     });
   };
+
+  const handleAddProduct = async() =>{
+    setIsLoading(true)
+    const res = await addNewProduct(formData)
+    if(res.success === true){
+      router.push('/')
+    toast.success(res.message)
+    setFormData(initialFormData)
+    setIsLoading(false)
+   }else{
+    toast.error(res.message)
+   }
+
+  }
   return (
     <>
       <div className="w-full mt-5 mr-0 ml-0 relative px-2 mb-2">
@@ -219,6 +239,7 @@ const AddProducts = () => {
                   formDataNotEmpty ? "bg-zinc-700" : "bg-black"
                 } px-2 py-2 text-lg text-white font-medium uppercase tracking-wide`}
                 disabled={formDataNotEmpty}
+                onClick={handleAddProduct}
               >
                 add product
               </button>
