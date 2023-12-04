@@ -1,15 +1,15 @@
 "use client";
 import React, { useContext } from "react";
 import { GlobalContext } from "@/context";
-const LoadingPage = () => {
+const LoadingPage = ({children}:any) => {
   const { isLoading } = useContext(GlobalContext);
   console.log("isLoading", isLoading);
 
   if (!isLoading) {
-    return <></>;
+    return <>{children}</>;
   }
   return (
-    <div className="absolute w-full h-full bottom-0 bg-black bg-opacity-25 loading-z_index_value">
+    <div className=" loading_page absolute w-full h-full bottom-0 bg-black bg-opacity-25 loading-z_index_value">
       <div
         role="status"
         className="absolute -translate-x-1/2 -translate-y-1/2 top-2/4 left-1/2"

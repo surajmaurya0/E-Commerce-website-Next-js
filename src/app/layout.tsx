@@ -26,8 +26,9 @@ export default function RootLayout({
         <GlobalState>
           <Navbar />
           <NextTopLoader color="#10f310" height={4} showSpinner={false} />
-          <LoadingPage />
+          <LoadingPage >
           <main className="flex flex-col mt-[80px]">{children}</main>
+          </LoadingPage>
         </GlobalState>
       </body>
     </html>

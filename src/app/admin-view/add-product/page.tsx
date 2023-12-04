@@ -41,9 +41,9 @@ const initialFormData = {
 
 const AddProducts = () => {
   const [formData, setFormData] = useState<any>(initialFormData);
-  const{setIsLoading} = useContext(GlobalContext)
-  const router = useRouter()
-  const { imageUrl} = formData;
+  const { setIsLoading } = useContext(GlobalContext);
+  const router = useRouter();
+  const { imageUrl } = formData;
   const fileInputRef = useRef<any>(null);
   const formDataNotEmpty = useMemo(() => {
     const btnClick = Object.values(formData).every((data: any) => data !== "");
@@ -129,25 +129,24 @@ const AddProducts = () => {
     });
   };
 
-  const handleAddProduct = async() =>{
-    setIsLoading(true)
-    const res = await addNewProduct(formData)
-    if(res.success === true){
-      router.push('/')
-    toast.success(res.message)
-    setFormData(initialFormData)
-    setIsLoading(false)
-   }else{
-    toast.error(res.message)
-   }
-
-  }
+  const handleAddProduct = async () => {
+    setIsLoading(true);
+    const res = await addNewProduct(formData);
+    if (res.success === true) {
+      router.push("/");
+      toast.success(res.message);
+      setFormData(initialFormData);
+      setIsLoading(false);
+    } else {
+      toast.error(res.message);
+    }
+  };
   return (
     <>
       <div className="w-full mt-5 mr-0 ml-0 relative px-2 mb-2">
         <div className="felx felx-col items-start justify-start bg-white rounded-xl relative">
           <div className="w-full mt-6 mr-0 mb-0 ml-0 space-y-8 justify-center items-center flex flex-col">
-            <div className="md:w-3/4">
+            <div className="md:w-2/4">
               <div
                 onDrop={handleDrop}
                 onDragOver={(e) => e.preventDefault()}
@@ -200,7 +199,11 @@ const AddProducts = () => {
               )} */}
               <div className="flex gap-2 mt-3 flex-col items-start">
                 <label className="font-semibold">Available size</label>
-                <TileComponents selected={formData.sizes} data={AvailbleSize} onClick={handleTileClick} />
+                <TileComponents
+                  selected={formData.sizes}
+                  data={AvailbleSize}
+                  onClick={handleTileClick}
+                />
               </div>
               {productControl.map(
                 ({
@@ -240,6 +243,7 @@ const AddProducts = () => {
                 } px-2 py-2 text-lg text-white font-medium uppercase tracking-wide`}
                 disabled={formDataNotEmpty}
                 onClick={handleAddProduct}
+                
               >
                 add product
               </button>
