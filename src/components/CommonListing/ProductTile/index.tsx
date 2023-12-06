@@ -1,9 +1,9 @@
 "use client";
 
-const ProductTile = () => {
+const ProductTile = (item:any) => {
   return (
   <>
-  <div>product tile</div>
+  <div>product tile{item}</div>
   </>
   )
 };

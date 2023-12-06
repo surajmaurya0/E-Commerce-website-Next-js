@@ -30,7 +30,7 @@ const CommonListing = () => {
                   return (
                     <>
                     <article key={item.id}>
-                    <ProductTile item={item} />
+                    <ProductTile item={`${item}`} />
 
                     </article>
                     </>
