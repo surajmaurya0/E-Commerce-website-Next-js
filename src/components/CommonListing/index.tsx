@@ -1,5 +1,7 @@
 "use client";
 
+import ProductTile from "./ProductTile";
+
 const CommonListing = () => {
   const dummyData = [
     {
@@ -24,8 +26,15 @@ const CommonListing = () => {
         <div className=" mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
           <div className=" mt-10 grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-4 lg:mt-16 ">
             {dummyData && dummyData.length
-              ? dummyData.map(() => {
-                  return <></>;
+              ? dummyData.map((item:any) => {
+                  return (
+                    <>
+                    <article key={item.id}>
+                    <ProductTile item={item} />
+
+                    </article>
+                    </>
+                  );
                 })
               : null}
           </div>
