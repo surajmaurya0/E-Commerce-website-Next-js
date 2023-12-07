@@ -1,5 +1,6 @@
 "use client";
 
+import ProductButtons from "./ProductButtons";
 import ProductTile from "./ProductTile";
 
 const CommonListing = () => {
@@ -31,7 +32,7 @@ const CommonListing = () => {
                     <>
                     <article key={item.id}>
                     <ProductTile item={`${item}`} />
-
+                    <ProductButtons  />
                     </article>
                     </>
                   );
