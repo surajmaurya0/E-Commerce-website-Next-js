@@ -1,6 +1,9 @@
+import CommonListing from "@/components/CommonListing"
+
 const AllProduct =() =>{
     return (
         <>
+        <CommonListing/>
         </>
     )
 }

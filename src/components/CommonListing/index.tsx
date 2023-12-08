@@ -8,14 +8,13 @@ const CommonListing = () => {
     {
       name: "aaaa",
       description: "5695",
-      price: 0,
+      price: 1222,
       category: "women",
       sizes: [],
       deliveryInfo: "588",
       onSale: "no",
       priceDrop: 9898,
-      imageUrl:
-        "https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-375d5.ap…",
+      imageUrl:'https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-375d5.appspot.com/o/ecommerce%2F17018390346485207czy63p?alt=media&token=741947d0-e61f-4791-a084-2a6f591f408d',
       createdAt: "2023-11-06T11:43:28.530+00:00",
       updatedAt: "2023-11-06T11:43:28.530+00:00",
       __v: 0,
@@ -23,15 +22,15 @@ const CommonListing = () => {
   ];
   return (
     <>
-      <section className="bg-white py-12 sm:py-16">
-        <div className=" mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
-          <div className=" mt-10 grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-4 lg:mt-16 ">
+<section className="bg-white py-12 sm:py-16">
+      <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+        <div className="mt-10 grid grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-4 lg:mt-16">
             {dummyData && dummyData.length
               ? dummyData.map((item:any) => {
                   return (
                     <>
-                    <article key={item.id}>
-                    <ProductTile item={`${item}`} />
+                    <article key={item.id} className="relative flex flex-col overflow-hidden border cursor-pointer">
+                    <ProductTile item={item} />
                     <ProductButtons  />
                     </article>
                     </>
