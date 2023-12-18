@@ -34,7 +34,7 @@ const initialFormData = {
   category: "men",
   sizes: [],
   deliveryInfo: "",
-  onSale: "no",
+  onSale: "yes",
   imageUrl: "",
   priceDrop: 0,
 };
