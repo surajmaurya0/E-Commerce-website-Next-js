@@ -10,6 +10,8 @@ export const DELETE = async(req:any)=>{
         await connectDB()
         const {searchParams} = new URL(req.url)
         const id =searchParams.get('id')
+        console.log('idddd', id);
+        
         if(!id) return NextResponse.json({ success:false,message:' Product ID is required'})
         const deletedProduct = await Product.findByIdAndDelete(id)
        return deletedProduct ? NextResponse.json({success:true,message:'Product is deleted'}) : NextResponse.json({success:false,message:'Failed to delete product! Please try again later'});

@@ -18,7 +18,7 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-import { addNewProduct } from "@/services/product";
+import { addNewProduct, updateProductData } from "@/services/product";
 import { toast } from "react-toastify";
 import { GlobalContext } from "@/context";
 import { useRouter } from "next/navigation";
@@ -140,11 +140,12 @@ const AddProducts = () => {
     });
   };
 
-  const handleAddProduct = async () => {
+  const addAndUpdateBtnClick = async () => {
     setIsLoading(true);
-    const res = await addNewProduct(formData);
+    const res = updateProduct ? await updateProductData(formData) :await addNewProduct(formData);
     if (res.success === true) {
-      router.push("/");
+      console.log('res',res)  
+      router.push("/admin-view/all-products");
       toast.success(res.message);
       setFormData(initialFormData);
       setIsLoading(false);
@@ -152,10 +153,6 @@ const AddProducts = () => {
       toast.error(res.message);
     }
   };
-  const addAndUpdateBtnClick = () => {};
-  const addAndUpdateBtnText = useMemo(() => {
-    return updateProduct ? "Update Product" : "Add Product";
-  }, [updateProduct]);
   return (
     <>
       <div className="w-full mt-5 mr-0 ml-0 relative px-2 mb-2">
@@ -266,9 +263,9 @@ const AddProducts = () => {
                   formDataNotEmpty ? "bg-zinc-700" : "bg-black"
                 } px-2 py-2 text-lg text-white font-medium uppercase tracking-wide`}
                 disabled={formDataNotEmpty}
-                onClick={handleAddProduct}
+                onClick={addAndUpdateBtnClick}
               >
-                {addAndUpdateBtnText}
+                {updateProduct ? "Update Product" : "Add Product"}
               </button>
             </div>
           </div>

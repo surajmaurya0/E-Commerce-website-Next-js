@@ -32,7 +32,7 @@ export const getAllProduct = async () => {
   }
 };
 
-export const updateProduct = async (formData: any) => {
+export const updateProductData = async (formData: any) => {
   try {
     const res = await fetch("/api/admin/update-product", {
       method: "PUT",
@@ -50,7 +50,7 @@ export const updateProduct = async (formData: any) => {
 
 export const deleteProduct = async (id: any) => {
   try {
-    const res = await fetch(`/api/admin/delete-product/${id}`, {
+    const res = await fetch(`/api/admin/delete-product?id=${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${Cookies.get("token")}`,
