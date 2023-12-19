@@ -22,6 +22,7 @@ export default function GlobalState({ children }: GlobalStateProps) {
   const [user, setUser] = useState<UserDataI>();
   const [isAdminView, setIsAdminView] = useState(Boolean);
   const [cookiesToken, setCookiesToken] = useState<any>();
+  const [updateProduct, setUpdateProduct] = useState<any>();
 
   // setCookiesToken(token)
 
@@ -34,7 +35,7 @@ export default function GlobalState({ children }: GlobalStateProps) {
     if (!success) {
       Cookies.remove("token");
       localStorage.removeItem("user");
-      setCookiesToken(false)
+      setCookiesToken(false);
       toast.warning(message.name);
     }
   }, [cookiesToken]);
@@ -50,7 +51,7 @@ export default function GlobalState({ children }: GlobalStateProps) {
       setIsAdminView(false);
       setIsAuthUser(false);
     }
-  }, [tokenValid,cookiesToken]);
+  }, [tokenValid, cookiesToken]);
   return (
     <GlobalContext.Provider
       value={{
@@ -66,6 +67,8 @@ export default function GlobalState({ children }: GlobalStateProps) {
         setIsAdminView,
         isLoading,
         setIsLoading,
+        updateProduct,
+        setUpdateProduct,
       }}
     >
       {children}

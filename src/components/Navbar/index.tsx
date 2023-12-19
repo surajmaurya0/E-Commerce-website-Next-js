@@ -1,5 +1,5 @@
 "use client";
-import { Fragment, useCallback, useContext, } from "react";
+import { Fragment, useCallback, useContext, useEffect } from "react";
 import { adminNavOptions, navOptions, styles } from "@/utils";
 import { GlobalContext } from "@/context";
 import CommonModal from "../CommonModal";
@@ -13,10 +13,24 @@ import { NavbarMenuI } from "@/Interface";
 // const {isAuthUser} = false;
 
 const Navbar = () => {
-  const { showNavModal, setShowNavModal,isAuthUser, setIsAuthUser, user, setUser } =useContext(GlobalContext);
+  const {
+    showNavModal,
+    setShowNavModal,
+    isAuthUser,
+    setIsAuthUser,
+    user,
+    setUser,
+    setUpdateProduct,
+    updateProduct,
+  } = useContext(GlobalContext);
   console.log(user);
-  const pathName = usePathname()
-  const isAdminView = pathName.includes('admin-view')
+  const pathName = usePathname();
+  const isAdminView = pathName.includes("admin-view");
+  useEffect(() => {
+    if (pathName !== "/admin-view/add-product" && updateProduct !== null) {
+      setUpdateProduct(null);
+    }
+  }, [pathName]);
   const router = useRouter();
   function NavItem({ isModalView = false }: any) {
     const item = isAuthUser && isAdminView ? adminNavOptions : navOptions;
@@ -49,7 +63,7 @@ const Navbar = () => {
     localStorage.removeItem("user");
     toast.warn("Logout from Website");
     router.push("/");
-  },[router, setIsAuthUser,setUser])
+  }, [router, setIsAuthUser, setUser]);
 
   return (
     <>
