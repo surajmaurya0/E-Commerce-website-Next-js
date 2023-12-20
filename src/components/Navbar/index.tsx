@@ -30,6 +30,7 @@ const Navbar = () => {
     if (pathName !== "/admin-view/add-product" && updateProduct !== null) {
       setUpdateProduct(null);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathName]);
   const router = useRouter();
   function NavItem({ isModalView = false }: any) {

@@ -7,9 +7,11 @@ import { useRouter } from "next/navigation";
 
 const CommonListing = ({ data }: any) => {
   const router = useRouter()
-  useEffect(()=>{
-    router.refresh()
-  },[])
+
+  //getting bug wen using useEffect
+  // useEffect(()=>{
+  //   router.refresh()
+  // },[router])
   console.log("product", data);
   return (
     <>
