@@ -110,11 +110,9 @@ const Navbar = () => {
                 Logout
               </button>
             ) : (
-              <Link href="/login">
-                <button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">
+                <button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white" onClick={()=> router.push('/login')}>
                   Login
                 </button>
-              </Link>
             )}
             <button
               data-collapse-toggle="navbar-sticky"

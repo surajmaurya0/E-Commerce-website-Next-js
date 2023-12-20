@@ -17,7 +17,7 @@ export const navOptions = [
   {
     id: "listingWomen",
     label: "Women",
-    path: "/product/listing/Women",
+    path: "/product/listing/women",
   },
   {
     id: "listingKids",
