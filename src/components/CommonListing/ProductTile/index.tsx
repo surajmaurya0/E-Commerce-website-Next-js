@@ -7,10 +7,12 @@ const ProductTile = ({item}:any) => {
     <>
       <div>
         <div className="overflow-hidden aspect-w-1 aspect-h-1 h-52">
-        <img
+        <Image
             src={item.imageUrl}
             alt="Product image"
             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-125"
+            width={120}
+            height={150}
           />
         </div>
         {item.onSale === "yes" ? (
