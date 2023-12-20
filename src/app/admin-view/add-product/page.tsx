@@ -22,6 +22,7 @@ import { addNewProduct, updateProductData } from "@/services/product";
 import { toast } from "react-toastify";
 import { GlobalContext } from "@/context";
 import { useRouter } from "next/navigation";
+import ComponentLevelLoader from "@/components/Loader/Componentlevel";
 
 const app = initializeApp(firebaseConfig);
 
@@ -40,7 +41,12 @@ const initialFormData = {
 };
 
 const AddProducts = () => {
-  const { setIsLoading, updateProduct } = useContext(GlobalContext);
+  const {
+    // setIsLoading,
+    updateProduct,
+    componentLevelLoader,
+    setComponentLevelLoader,
+  } = useContext(GlobalContext);
   const [formData, setFormData] = useState<any>(
     updateProduct ? updateProduct : initialFormData
   );
@@ -80,7 +86,7 @@ const AddProducts = () => {
       );
     });
   }, []);
-  console.log("updateProduct", formData);
+  console.log("updateProduct", updateProduct);
 
   const handleDrop = (e: any) => {
     e.preventDefault();
@@ -141,14 +147,16 @@ const AddProducts = () => {
   };
 
   const addAndUpdateBtnClick = async () => {
-    setIsLoading(true);
-    const res = updateProduct ? await updateProductData(formData) :await addNewProduct(formData);
+    setComponentLevelLoader({ loading: true, id: "" });
+    const res = updateProduct
+      ? await updateProductData(formData)
+      : await addNewProduct(formData);
     if (res.success === true) {
-      console.log('res',res)  
+      console.log("res", res);
       router.push("/admin-view/all-products");
       toast.success(res.message);
       setFormData(initialFormData);
-      setIsLoading(false);
+      setComponentLevelLoader({ loading: false, id: "" });
     } else {
       toast.error(res.message);
     }
@@ -265,7 +273,23 @@ const AddProducts = () => {
                 disabled={formDataNotEmpty}
                 onClick={addAndUpdateBtnClick}
               >
-                {updateProduct ? "Update Product" : "Add Product"}
+                {componentLevelLoader && componentLevelLoader.loading ? (
+                  <ComponentLevelLoader
+                    text={
+                      updateProduct !== undefined
+                        ? "Updating Product"
+                        : "Adding Product"
+                    }
+                    color={"#ffffff"}
+                    loading={
+                      componentLevelLoader && componentLevelLoader.loading
+                    }
+                  />
+                ) : updateProduct !== undefined ? (
+                  "Update Product"
+                ) : (
+                  "Add Product"
+                )}
               </button>
             </div>
           </div>

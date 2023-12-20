@@ -5,7 +5,7 @@ import GlobalState from "@/context";
 import Navbar from "@/components/Navbar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import LoadingPage from "@/components/Loading";
+// import LoadingPage from "@/components/Loading";
 import NextTopLoader from "nextjs-toploader";
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,9 +26,9 @@ export default function RootLayout({
         <GlobalState>
           <Navbar />
           <NextTopLoader color="#10f310" height={4} showSpinner={false} />
-          <LoadingPage >
+          {/* <LoadingPage > */}
           <main className="flex flex-col mt-[80px]">{children}</main>
-          </LoadingPage>
+          {/* </LoadingPage> */}
         </GlobalState>
       </body>
     </html>

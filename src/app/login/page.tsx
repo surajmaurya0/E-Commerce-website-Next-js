@@ -8,6 +8,7 @@ import { GlobalContext } from "@/context";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import {LoginFormInputI } from "@/Interface";
+import ComponentLevelLoader from "@/components/Loader/Componentlevel";
 const intialState = {
   email: "",
   password: "",
@@ -20,7 +21,8 @@ const Login = () => {
     user,
     setUser,
     setIsAdminView,
-    setIsLoading,
+    componentLevelLoader, 
+    setComponentLevelLoader
   } = useContext(GlobalContext);
   const router = useRouter();
   const onChangeLogin = (label: string, value: string) => {
@@ -35,13 +37,13 @@ const Login = () => {
   }, [logInData]);
 
   const onLoginSubmit = async () => {
-    setIsLoading(true);
+    setComponentLevelLoader({ loading: true, id: "" });
     const res = await logIn(logInData);
     console.log("resresresresresresresresres",res);
     const { success, data, message } = res;
     if (!success) {
       setIsAuthUser(false);
-      setIsLoading(false);
+      setComponentLevelLoader({ loading: false, id: "" });
       return toast.error(message);
     }
     //if res.success is success
@@ -52,7 +54,7 @@ const Login = () => {
     Cookies.set("token", data?.token);
     localStorage.setItem("user", JSON.stringify(data?.user));
     setIsAdminView(data?.user.role === "admin" ? true : false);
-    setIsLoading(false);
+    setComponentLevelLoader({ loading: false, id: "" });
   };
   console.log(isAuthUser, user);
 
@@ -93,7 +95,13 @@ const Login = () => {
                     disabled={formDataNotEmpty}
                     onClick={onLoginSubmit}
                   >
-                    Login
+                    {componentLevelLoader && componentLevelLoader.loading ? (
+              <ComponentLevelLoader
+                text={'LOGIN'}
+                color={"#ffffff"}
+                loading={componentLevelLoader && componentLevelLoader.loading}
+              />
+            ) : 'Login'}
                   </button>
                 </div>
                 <div className="w-full mt-6">

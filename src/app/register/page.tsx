@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { GlobalContext } from "@/context";
 import { RegistrationFormInputI,RegistrationFormDataI } from "@/Interface";
 import { useRouter } from "next/navigation";
+import ComponentLevelLoader from "@/components/Loader/Componentlevel";
 const intialFormData = {
   name: "",
   email: "",
@@ -18,7 +19,7 @@ const intialFormData = {
 const Register = () => {
   const [formData, setFormData] = useState<RegistrationFormDataI>(intialFormData);
   const [isRegistered, setIsRegistered] = useState<boolean>();
-  const { setIsLoading,isAuthUser } = useContext(GlobalContext);
+  const {isAuthUser,setComponentLevelLoader,componentLevelLoader } = useContext(GlobalContext);
   const router = useRouter()
   const onChangeFormData = useCallback(
     (label: string, value: string) => {
@@ -34,18 +35,19 @@ const Register = () => {
     return !allValuesAreNonEmpty;
   }, [formData]);
   const handleRegisterSubmit = useCallback(async () => {
-    setIsLoading(true);
+    setComponentLevelLoader({ loading: true, id: "" });
     const response = await registerUser(formData);
     console.log(response);
     if (response.success === false) {
-      setIsLoading(false);
+      setComponentLevelLoader({ loading: false, id: "" });
+
       return toast.dismiss(response.message);
     }
     setIsRegistered(true);
     toast.success(response.message);
-    setIsLoading(false);
+    setComponentLevelLoader({ loading: false, id: "" });
     setFormData(intialFormData);
-  }, [formData, setIsLoading]);
+  }, [formData,setComponentLevelLoader]);
   useEffect(()=>{
     if(isAuthUser) router.push('/')
   },[isAuthUser,router])
@@ -107,7 +109,13 @@ const Register = () => {
                         disabled={formDataNotEmpty}
                         onClick={handleRegisterSubmit}
                       >
-                        Register
+                        {componentLevelLoader && componentLevelLoader.loading ? (
+              <ComponentLevelLoader
+                text={'REGISTER'}
+                color={"#ffffff"}
+                loading={componentLevelLoader && componentLevelLoader.loading}
+              />
+            ) : 'REGISTER'}
                       </button>
                     </div>
                     <div className="w-full mt-6">

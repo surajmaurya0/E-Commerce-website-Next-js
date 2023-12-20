@@ -23,6 +23,10 @@ export default function GlobalState({ children }: GlobalStateProps) {
   const [isAdminView, setIsAdminView] = useState(Boolean);
   const [cookiesToken, setCookiesToken] = useState<any>();
   const [updateProduct, setUpdateProduct] = useState<any>();
+  const [componentLevelLoader, setComponentLevelLoader] = useState({
+    loading: false,
+    id: "",
+  });
 
   // setCookiesToken(token)
 
@@ -69,6 +73,8 @@ export default function GlobalState({ children }: GlobalStateProps) {
         setIsLoading,
         updateProduct,
         setUpdateProduct,
+        componentLevelLoader, 
+        setComponentLevelLoader
       }}
     >
       {children}
