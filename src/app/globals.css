@@ -25,3 +25,7 @@
   .loading_page{
     overflow-anchor-: none
   }
+  .page-loader{
+    margin:auto;
+    margin-top:inherit
+  }
