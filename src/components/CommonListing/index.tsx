@@ -1,15 +1,16 @@
 "use client";
 
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import ProductButtons from "./ProductButtons";
 import ProductTile from "./ProductTile";
 import { useRouter } from "next/navigation";
 
 const CommonListing = ({ data }: any) => {
   const router = useRouter()
-  useEffect(()=>{
-    router.refresh()
-  },[])
+  // getting error
+  // useEffect(()=>{
+  //   router.refresh()
+  // },[])
   console.log("product", data);
   return (
     <>
@@ -21,8 +22,9 @@ const CommonListing = ({ data }: any) => {
                   return (
                     <>
                       <article
-                        key={item.id}
+                        key={item._id}
                         className="relative flex flex-col overflow-hidden border cursor-pointer"
+                        onClick={()=> router.push(`/product/${item._id}`) }
                       >
                         <ProductTile item={item} />
                         <ProductButtons item={item} />

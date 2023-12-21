@@ -76,3 +76,19 @@ export const productByCategory = async (id: any) => {
     console.log(error);
   }
 };
+
+export const productById = async(id:any) =>{
+  try {
+    const res = await fetch(
+      `http://localhost:3000/api/product-by-id?id=${id}`,
+      {
+        method: "GET",
+        cache:'no-store'
+      }
+    );
+    return await res.json();
+  } catch (error) {
+      console.log(error)
+  }
+
+}
