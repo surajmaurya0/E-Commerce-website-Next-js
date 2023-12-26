@@ -276,7 +276,7 @@ const AddProducts = () => {
                 {componentLevelLoader && componentLevelLoader.loading ? (
                   <ComponentLevelLoader
                     text={
-                      updateProduct !== undefined
+                      updateProduct 
                         ? "Updating Product"
                         : "Adding Product"
                     }
@@ -285,7 +285,7 @@ const AddProducts = () => {
                       componentLevelLoader && componentLevelLoader.loading
                     }
                   />
-                ) : updateProduct !== undefined ? (
+                ) : updateProduct  ? (
                   "Update Product"
                 ) : (
                   "Add Product"
