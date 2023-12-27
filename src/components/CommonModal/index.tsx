@@ -26,7 +26,7 @@ const CommonModal = ({
           >
             <div className="fixed inset-0  bg-opacity-75 transition-opacity" />
           </Transition.Child>
-          <div className="fixed inset-0 overflow-hidden">
+          <div className="bg-[#00000080] fixed inset-0 overflow-hidden ">
             <div className="absolute inset-0 overflow-hidden">
               <Transition.Child
                 as={Fragment}

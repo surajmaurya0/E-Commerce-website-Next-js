@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 
 const ProductTile = ({item}:any) => {
   const router = useRouter()
+  const itemOnsale = item.onSale === "yes" && item.priceDrop > 0
   return (
     <>
       <div> 
@@ -15,7 +16,7 @@ const ProductTile = ({item}:any) => {
             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-125"
           />
         </div>
-        {item.onSale === "yes" ? (
+        {itemOnsale? (
           <div className="absolute top-0 m-2 rounded-full bg-black">
             <p className="rounded-full  p-1 text-[8px] font-bold uppercase tracking-wide text-white sm:py-1 sm:px-3">
               Sale
@@ -26,20 +27,20 @@ const ProductTile = ({item}:any) => {
           <div className="mb-2 flex">
           <p
             className={`mr-3 text-sm font-semibold ${
-              item.onSale === "yes" ? "line-through" : ""
+              itemOnsale && "line-through" 
             }`}
           >{`$ ${item.price}`}</p>
-           {item.onSale === "yes" ? (
+           {itemOnsale && (
             <p className="mr-3 text-sm font-semibold text-red-700">{`$ ${(
               item.price -
               item.price * (item.priceDrop / 100)
             ).toFixed(2)}`}</p>
-          ) : null}
-           {item.onSale === "yes" ? (
+          )}
+           {itemOnsale && (
             <p className="mr-3 text-sm font-semibold">{`-(${item.priceDrop}%)off`}</p>
-          ) : null}
+          )}
           </div>
-          <h3 className="md-2 text-gray-400 text-sm">{item.name}</h3>
+          <h3 className="md-2 text-gray-400 text-sm uppercase">{item.name}</h3>
         </div>
       </div>
     </>

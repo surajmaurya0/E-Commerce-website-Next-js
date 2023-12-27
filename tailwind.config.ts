@@ -14,6 +14,15 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
     },
+    keyframes: {
+      moveForwardAndBack: {
+        '0%, 100%': { transform: 'translateX(0)' },
+        '50%': { transform: 'translateX(15px)' },
+      },
+    },
+    animation: {
+      moveForwardAndBack: 'moveForwardAndBack 2s ease-in-out infinite',
+    }
   },
   plugins: [],
 }

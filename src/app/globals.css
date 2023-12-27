@@ -25,3 +25,9 @@
   .loading_page{
     overflow-anchor-: none
   }
+  .cart_list{
+    max-height:30vh
+  }
+  .empty_cart_img{
+    height:150px !important
+  }
