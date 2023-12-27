@@ -8,6 +8,7 @@ import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import { usePathname, useRouter } from "next/navigation";
 import { NavbarMenuI } from "@/Interface";
+import CartModal from "../CartModal";
 
 // const isAdminView = false;
 // const {isAuthUser} = false;
@@ -22,6 +23,7 @@ const Navbar = () => {
     setUser,
     setUpdateProduct,
     updateProduct,
+    showCartModal
   } = useContext(GlobalContext);
   console.log(user);
   const pathName = usePathname();
@@ -81,7 +83,7 @@ const Navbar = () => {
                   Account
                 </button>
                 <button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">
-                  cart
+                  Cart
                 </button>
               </Fragment>
             )}
@@ -152,6 +154,10 @@ const Navbar = () => {
           />
         }
       />
+      {
+        showCartModal && 
+        <CartModal />
+      }
     </>
   );
 };

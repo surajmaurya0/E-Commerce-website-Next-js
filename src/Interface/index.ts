@@ -1,3 +1,4 @@
+import { HtmlContext } from "next/dist/server/future/route-modules/app-page/vendored/contexts/entrypoints";
 import React, { SetStateAction } from "react";
 
 export interface FormDataI {
@@ -13,7 +14,7 @@ export interface CommonModalInterfaceI {
     modalTitle?: string;
     mainContent?:  any;
     showbutton?: boolean;
-    buttonComponents?: boolean;
+    buttonComponents?: any;
     show?: boolean;
     setShow?:any;
     showModalTitle?: boolean;

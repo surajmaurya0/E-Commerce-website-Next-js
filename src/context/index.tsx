@@ -23,6 +23,8 @@ export default function GlobalState({ children }: GlobalStateProps) {
   const [isAdminView, setIsAdminView] = useState(Boolean);
   const [cookiesToken, setCookiesToken] = useState<any>();
   const [updateProduct, setUpdateProduct] = useState<any>();
+  const [showCartModal, setShowCartModel] = useState<boolean>(false);
+  const [cartItems, setCartItems] = useState(Array);
   const [componentLevelLoader, setComponentLevelLoader] = useState({
     loading: false,
     id: "",
@@ -73,8 +75,12 @@ export default function GlobalState({ children }: GlobalStateProps) {
         setIsLoading,
         updateProduct,
         setUpdateProduct,
-        componentLevelLoader, 
-        setComponentLevelLoader
+        componentLevelLoader,
+        setComponentLevelLoader,
+        showCartModal,
+        setShowCartModel,
+        cartItems,
+        setCartItems,
       }}
     >
       {children}

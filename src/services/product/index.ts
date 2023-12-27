@@ -69,6 +69,7 @@ export const productByCategory = async (id: any) => {
       `http://localhost:3000/api/product-by-category?id=${id}`,
       {
         method: "GET",
+        cache:'no-store'
       }
     );
     return await res.json();
