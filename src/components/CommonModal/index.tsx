@@ -37,8 +37,8 @@ const CommonModal = ({
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
               >
-                <Dialog.Panel className={"w-screen"}>
-                  <div className="flex h-full flex-col overflow-y-scroll bg-white  ">
+                <Dialog.Panel className={"w-screen flex justify-center "}>
+                  <div className=" data_modal flex h-full flex-col overflow-y-scroll bg-white">
                     <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
                       {showModalTitle && (
                         <div className="flex iten-start justify-between">

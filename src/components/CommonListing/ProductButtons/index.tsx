@@ -31,6 +31,8 @@ const ProductButtons = ({ item }: any) => {
       setComponentLevelLoader({ loading: false, id: "" });
     }
   };
+  console.log('user', user);
+  
   const handleAddCart =async(item:any) =>{
     setComponentLevelLoader({loading:true,id:item._id})
     const res = await addToCart({productID:item._id,userID:user._id})
@@ -78,7 +80,7 @@ const ProductButtons = ({ item }: any) => {
         )}
       </button>
     </>
-  ) : (
+  ) : user ? (
     <>
       <button onClick={()=> handleAddCart(item)} className="mt-1.5 flex w-full justify-center bg-black px-5 py-3 text-xs font-medium uppercase tracking-wide text-white">
       {componentLevelLoader &&
@@ -94,6 +96,6 @@ const ProductButtons = ({ item }: any) => {
         )}
       </button>
     </>
-  );
+  ): null;
 };
 export default ProductButtons;

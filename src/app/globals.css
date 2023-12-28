@@ -31,3 +31,18 @@
   .empty_cart_img{
     height:150px !important
   }
+  .activity-btn button{
+    margin:2px
+  }
+  @media screen and (max-width: 600px) {
+    .data_modal{
+      width:100vw !important
+    } 
+    /* Styles for screens with a maximum width of 600px */
+  }
+  @media screen and (min-width: 601px) and (max-width: 1024px) {
+    /* Styles for screens with a width between 601px and 1024px */
+    .data_modal{
+      width:80vw !important
+    } 
+  }

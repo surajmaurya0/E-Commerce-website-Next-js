@@ -1,5 +1,5 @@
 "use client";
-import { Fragment, useCallback, useContext, useEffect } from "react";
+import { Fragment, useCallback, useContext, useEffect, useMemo } from "react";
 import { adminNavOptions, navOptions, styles } from "@/utils";
 import { GlobalContext } from "@/context";
 import CommonModal from "../CommonModal";
@@ -23,7 +23,7 @@ const Navbar = () => {
     setUser,
     setUpdateProduct,
     updateProduct,
-    showCartModal
+    showCartModal,
   } = useContext(GlobalContext);
   console.log(user);
   const pathName = usePathname();
@@ -34,6 +34,64 @@ const Navbar = () => {
     }
   }, [pathName]);
   const router = useRouter();
+
+  const HandleLogoutBtn = useCallback(() => {
+    setIsAuthUser(false);
+    setUser(null);
+    Cookies.remove("token");
+    localStorage.removeItem("user");
+    toast.warn("Logout from Website");
+    router.push("/");
+  }, [router, setIsAuthUser, setUser]);
+
+  const activityBtn: any = useMemo(() => {
+    return (
+      <>
+        {!isAdminView && isAuthUser && (
+          <Fragment>
+            <button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">
+              Account
+            </button>
+            <button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">
+              Cart
+            </button>
+          </Fragment>
+        )}
+        {isAuthUser && user.role === "admin" ? (
+          isAdminView ? (
+            <button
+              className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
+              onClick={() => router.push("/")}
+            >
+              Client View
+            </button>
+          ) : (
+            <button
+              className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
+              onClick={() => router.push("/admin-view")}
+            >
+              Admin View
+            </button>
+          )
+        ) : null}
+        {isAuthUser ? (
+          <button
+            className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
+            onClick={HandleLogoutBtn}
+          >
+            Logout
+          </button>
+        ) : (
+          <button
+            className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
+            onClick={() => router.push("/login")}
+          >
+            Login
+          </button>
+        )}
+      </>
+    );
+  }, [HandleLogoutBtn, isAdminView, isAuthUser, router, user]);
   function NavItem({ isModalView = false }: any) {
     const item = isAuthUser && isAdminView ? adminNavOptions : navOptions;
     return (
@@ -55,18 +113,13 @@ const Navbar = () => {
             </li>
           ))}
         </ul>
+        <div className="md:hidden activity-btn">
+
+            {activityBtn}
+            </div>
       </div>
     );
   }
-  const HandleLogoutBtn = useCallback(() => {
-    setIsAuthUser(false);
-    setUser(null);
-    Cookies.remove("token");
-    localStorage.removeItem("user");
-    toast.warn("Logout from Website");
-    router.push("/");
-  }, [router, setIsAuthUser, setUser]);
-
   return (
     <>
       <nav className="bg-white fixed w-full z-20 top-0 left-0 border-b border-gray-200">
@@ -77,45 +130,10 @@ const Navbar = () => {
             </span>
           </div>
           <div className="flex md:order-2 gap-2">
-            {!isAdminView && isAuthUser && (
-              <Fragment>
-                <button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">
-                  Account
-                </button>
-                <button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">
-                  Cart
-                </button>
-              </Fragment>
-            )}
-            {isAuthUser && user.role === "admin" ? (
-              isAdminView ? (
-                <button
-                  className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
-                  onClick={() => router.push("/")}
-                >
-                  Client View
-                </button>
-              ) : (
-                <button
-                  className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
-                  onClick={() => router.push("/admin-view")}
-                >
-                  Admin View
-                </button>
-              )
-            ) : null}
-            {isAuthUser ? (
-              <button
-                className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
-                onClick={HandleLogoutBtn}
-              >
-                Logout
-              </button>
-            ) : (
-                <button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white" onClick={()=> router.push('/login')}>
-                  Login
-                </button>
-            )}
+            <div className="min-[10px]:hidden md:block activity-btn">
+
+            {activityBtn}
+            </div>
             <button
               data-collapse-toggle="navbar-sticky"
               type="button"
@@ -154,10 +172,7 @@ const Navbar = () => {
           />
         }
       />
-      {
-        showCartModal && 
-        <CartModal />
-      }
+      {showCartModal && <CartModal />}
     </>
   );
 };
