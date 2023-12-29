@@ -39,7 +39,7 @@ const CommonModal = ({
               >
                 <Dialog.Panel className={"w-screen flex justify-center "}>
                   <div className=" data_modal flex h-full flex-col overflow-y-scroll bg-white">
-                    <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
+                    <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6 overflow-hidden">
                       {showModalTitle && (
                         <div className="flex iten-start justify-between">
                           <Dialog.Title>{modalTitle}</Dialog.Title>

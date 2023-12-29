@@ -3,14 +3,36 @@
 import { useContext } from "react";
 import ComponentLevelLoader from "../Loader/Componentlevel";
 import { GlobalContext } from "@/context";
+import { addToCart } from "@/services/cart";
+import { toast } from "react-toastify";
 
 const CommonDetails = ({ item }: any) => {
   const {
     setComponentLevelLoader,
     componentLevelLoader,
     user,
-    setShowCartModal,
+    setShowCartModel,
   } = useContext(GlobalContext);
+
+  const handleAddCart =async(item:any) =>{
+    setComponentLevelLoader({loading:true,id:item._id})
+    const res = await addToCart({productID:item._id,userID:user._id})
+    if(res.success){
+      toast.success(res.message,{
+        position:toast.POSITION.TOP_RIGHT
+      })
+      setShowCartModel(true)
+      setComponentLevelLoader({loading:false,id:''})
+    }else{
+      toast.error(res.message,{
+        position:toast.POSITION.TOP_RIGHT
+      })
+      setShowCartModel(true)
+      setComponentLevelLoader({loading:false,id:''})
+    }
+    console.log('res',res)
+
+  }
   return (
     <section className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
       <div className="container mx-auto px-4">
@@ -60,12 +82,12 @@ const CommonDetails = ({ item }: any) => {
               <div className="flex items-end">
                 <h1
                   className={`text-3xl font-bold mr-2 ${
-                    item.onSale === "yes" ? "line-through" : ""
+                    item.onSale === "yes" && item.priceDrop >0 ? "line-through" : ""
                   }`}
                 >
                   ${item && item.price}
                 </h1>
-                {item.onSale === "yes" ? (
+                {item.onSale === "yes" && item.priceDrop >0 ? (
                   <h1 className="text-3xl font-bold text-red-700">{`$${(
                     item.price -
                     item.price * (item.priceDrop / 100)
@@ -74,7 +96,7 @@ const CommonDetails = ({ item }: any) => {
               </div>
               <button
                 type="button"
-                // onClick={() => handleAddToCart(item)}
+                onClick={() => handleAddCart(item)}
                 className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium tracking-wide uppercase text-white"
               >
                 {componentLevelLoader && componentLevelLoader.loading ? (

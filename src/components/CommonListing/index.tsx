@@ -23,7 +23,7 @@ const CommonListing = ({ data }: any) => {
                     <>
                       <article
                         key={item._id}
-                        className="relative flex flex-col overflow-hidden border cursor-pointer"
+                        className="relative flex flex-col overflow-hidden border cursor-pointer product_card"
                        
                       >
                         <ProductTile item={item} />

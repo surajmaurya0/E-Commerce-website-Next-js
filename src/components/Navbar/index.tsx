@@ -52,7 +52,10 @@ const Navbar = () => {
             <button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">
               Account
             </button>
-            <button className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">
+            <button
+              className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
+              onClick={() => router.push("/cart")}
+            >
               Cart
             </button>
           </Fragment>
@@ -113,10 +116,7 @@ const Navbar = () => {
             </li>
           ))}
         </ul>
-        <div className="md:hidden activity-btn">
-
-            {activityBtn}
-            </div>
+        <div className="md:hidden activity-btn">{activityBtn}</div>
       </div>
     );
   }
@@ -131,8 +131,7 @@ const Navbar = () => {
           </div>
           <div className="flex md:order-2 gap-2">
             <div className="min-[10px]:hidden md:block activity-btn">
-
-            {activityBtn}
+              {activityBtn}
             </div>
             <button
               data-collapse-toggle="navbar-sticky"

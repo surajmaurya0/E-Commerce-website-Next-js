@@ -19,7 +19,7 @@
     height: 10px;
   }
   img{
-    width:500px;
+    /* width:500px; */
     height:288px
   }
   .loading_page{
@@ -34,15 +34,21 @@
   .activity-btn button{
     margin:2px
   }
+  .product_card{
+    box-shadow: 0px 0px 11px 0px #433e438a
+  }
   @media screen and (max-width: 600px) {
     .data_modal{
       width:100vw !important
     } 
     /* Styles for screens with a maximum width of 600px */
   }
-  @media screen and (min-width: 601px) and (max-width: 1024px) {
+  @media screen and (min-width: 601px){
     /* Styles for screens with a width between 601px and 1024px */
     .data_modal{
       width:80vw !important
     } 
   }
+  /* .data_modal{
+    min-height:56vh
+  } */

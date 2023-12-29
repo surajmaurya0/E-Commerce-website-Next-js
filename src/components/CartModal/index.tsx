@@ -1,5 +1,5 @@
 "use client";
-import { useContext, useEffect } from "react";
+import { useCallback, useContext, useEffect } from "react";
 import CommonModal from "../CommonModal";
 import { GlobalContext } from "@/context";
 import { deleteFromCart, getAllCartItem } from "@/services/cart";
@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import ComponentLevelLoader from "../Loader/Componentlevel";
 import emptyCart from '../../image/empty-cart.svg'
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const CartModal = () => {
   const {
@@ -18,14 +19,15 @@ const CartModal = () => {
     componentLevelLoader,
     setComponentLevelLoader,
   } = useContext(GlobalContext);
+  const router = useRouter()
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const extractAllCartItem = async () => {
+  const extractAllCartItem = useCallback(async () => {
     const res = await getAllCartItem(user?._id);
     if (res.success) {
       setCartItems(res.data);
       localStorage.setItem("cartItems", JSON.stringify(res.data));
     }
-  };
+  },[setCartItems, user])
   useEffect(() => {
     if (user !== null) extractAllCartItem();
   }, [user, cartItems, extractAllCartItem]);
@@ -115,6 +117,7 @@ const CartModal = () => {
         <>
           <button
             type="button"
+            onClick={()=> router.push('/cart')}
             className="mt-1.5 w-full inline-block bg-block text-white px-5 py-3 text-xs font-medium uppercase tracking bg-black"
           >
             Go To Cart
