@@ -117,7 +117,10 @@ const CartModal = () => {
         <>
           <button
             type="button"
-            onClick={()=> router.push('/cart')}
+            onClick={()=>{ 
+              router.push('/cart'),
+              setShowCartModel(false)
+          }}
             className="mt-1.5 w-full inline-block bg-block text-white px-5 py-3 text-xs font-medium uppercase tracking bg-black"
           >
             Go To Cart

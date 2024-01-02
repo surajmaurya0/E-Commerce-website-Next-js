@@ -16,7 +16,7 @@ const Cart = () => {
   },[setCartItems, user])
   useEffect(() => {   
     if (user !== null) extractAllCartItem();
-  }, [user]);
+  }, [extractAllCartItem, user]);
 
   return <CommonCart cartItems={cartItems} />;
 };

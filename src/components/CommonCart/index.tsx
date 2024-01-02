@@ -1,11 +1,13 @@
 'use client'
 
 import { GlobalContext } from "@/context";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import ComponentLevelLoader from "../Loader/Componentlevel";
 import { deleteFromCart } from "@/services/cart";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import emptyCart from '../../image/empty-cart.svg'
 
 const CommonCart = ({ cartItems = [] }: any) => {
   const router = useRouter()
@@ -94,13 +96,15 @@ const CommonCart = ({ cartItems = [] }: any) => {
                       );
                     })}
                   </ul>
-                ) : null}
+                ) : <div className="py-6 w-full text-center animate-moveForwardAndBack">
+                <Image src={emptyCart} className="m-auto empty_cart_img "  alt='empty cart' height={150} width={100}/>
+                <p className="text-gray-500 uppercase font-semibold ">Your cart is empty</p></div>}
               </div>
               <div className="mt-6 border-t border-b py-2">
                 <div className="flex items-center justify-between">
                   <p className="text-sm text-gray-400">Subtotal</p>
                   <p className="text-sm text-black font-semibold">
-                    {cartItems && cartItems.length
+                    ${cartItems && cartItems.length
                       ? cartItems.reduce(
                           (total: any, item: any) =>
                             item.productID.price + total,
@@ -116,7 +120,7 @@ const CommonCart = ({ cartItems = [] }: any) => {
                 <div className="flex items-center justify-between">
                   <p className="text-sm text-gray-400">Total</p>
                   <p className="text-sm text-black font-semibold">
-                    {cartItems && cartItems.length
+                   ${cartItems && cartItems.length
                       ? cartItems.reduce(
                           (total: any, item: any) =>
                             item.productID.price + total,
@@ -128,8 +132,9 @@ const CommonCart = ({ cartItems = [] }: any) => {
                 <div className="mt-5 text-center">
                   <button
                     type="button"
-                    className="group inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg text-white font-medium uppercase tracking "
-                  >
+                    className={`group inline-flex w-full items-center justify-center ${cartItems.length ? "bg-black" : "bg-zinc-600"} bg-black px-6 py-2 text-lg text-white font-medium uppercase tracking`}
+                    disabled={!cartItems.length}
+                 >
                     {" "}
                     Checkout
                   </button>
