@@ -21,7 +21,7 @@ export const PUT = async (req: any) => {
       );
       if (updateAddress) {
         return NextResponse.json({
-          success: false,
+          success: true,
           message: "Address update successfuly",
         });
       } else {

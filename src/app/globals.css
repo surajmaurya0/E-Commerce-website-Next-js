@@ -52,3 +52,7 @@
   /* .data_modal{
     min-height:56vh
   } */
+
+  .shadow-custom{
+    box-shadow: 16px 9px 27px -4px rgba(117,117,117,0.5);
+  }

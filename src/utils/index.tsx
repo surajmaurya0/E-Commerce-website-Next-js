@@ -175,7 +175,7 @@ export const AdminAddProductFormControls = [
 
 export const addNewAddressFormControl = [
   {
-    id: "fullname",
+    id: "fullName",
     type: "input",
     placeholder: "Enter your full name",
     label: "Full Name",

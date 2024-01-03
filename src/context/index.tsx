@@ -25,6 +25,14 @@ export default function GlobalState({ children }: GlobalStateProps) {
   const [updateProduct, setUpdateProduct] = useState<any>();
   const [showCartModal, setShowCartModel] = useState<boolean>(false);
   const [cartItems, setCartItems] = useState(Array);
+  const [address, setAddress] = useState(Array);
+  const [addressFormData, setAddressFormData] = useState<any>({
+    fullName: "",
+    city: "",
+    country: "",
+    postalCode: "",
+    address: "",
+  });
   const [componentLevelLoader, setComponentLevelLoader] = useState({
     loading: false,
     id: "",
@@ -81,6 +89,10 @@ export default function GlobalState({ children }: GlobalStateProps) {
         setShowCartModel,
         cartItems,
         setCartItems,
+        address,
+        setAddress,
+        addressFormData,
+        setAddressFormData,
       }}
     >
       {children}
