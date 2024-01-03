@@ -37,7 +37,6 @@ const Register = () => {
   const handleRegisterSubmit = useCallback(async () => {
     setComponentLevelLoader({ loading: true, id: "" });
     const response = await registerUser(formData);
-    console.log(response);
     if (response.success === false) {
       setComponentLevelLoader({ loading: false, id: "" });
 

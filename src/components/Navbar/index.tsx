@@ -25,7 +25,6 @@ const Navbar = () => {
     updateProduct,
     showCartModal,
   } = useContext(GlobalContext);
-  console.log(user);
   const pathName = usePathname();
   const isAdminView = pathName.includes("admin-view");
   useEffect(() => {

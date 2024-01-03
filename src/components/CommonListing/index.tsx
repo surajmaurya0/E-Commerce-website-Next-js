@@ -11,7 +11,6 @@ const CommonListing = ({ data }: any) => {
   // useEffect(()=>{
   //   router.refresh()
   // },[])
-  console.log("product", data);
   return (
     <>
       <section className="bg-white pb-3 sm:pb-4">

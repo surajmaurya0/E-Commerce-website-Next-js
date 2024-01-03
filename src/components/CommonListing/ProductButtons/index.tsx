@@ -31,7 +31,6 @@ const ProductButtons = ({ item }: any) => {
       setComponentLevelLoader({ loading: false, id: "" });
     }
   };
-  console.log('user', user);
   
   const handleAddCart =async(item:any) =>{
     setComponentLevelLoader({loading:true,id:item._id})
@@ -49,7 +48,6 @@ const ProductButtons = ({ item }: any) => {
       setShowCartModel(true)
       setComponentLevelLoader({loading:false,id:''})
     }
-    console.log('res',res)
 
   }
   const isAdminView = pathName.includes("admin-view");

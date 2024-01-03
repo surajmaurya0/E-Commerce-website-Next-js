@@ -46,7 +46,6 @@ const CartModal = () => {
       });
     }
     setComponentLevelLoader({ loading: false, id: "" });
-    console.log(res);
   };
   return (
     <CommonModal

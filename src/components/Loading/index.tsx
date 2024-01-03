@@ -3,7 +3,6 @@ import React, { useContext } from "react";
 import { GlobalContext } from "@/context";
 const LoadingPage = ({children}:any) => {
   const { isLoading } = useContext(GlobalContext);
-  console.log("isLoading", isLoading);
 
   if (!isLoading) {
     return <>{children}</>;

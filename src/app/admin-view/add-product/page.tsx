@@ -61,7 +61,6 @@ const AddProducts = () => {
     const btnClick = Object.values(formData).every((data: any) => data !== "");
     return !btnClick;
   }, [formData]);
-  console.log("imgBlur", imgBlur);
 
   //getting image url from firebase
   const extractImageUrl = useCallback((fileData: any) => {
@@ -86,7 +85,6 @@ const AddProducts = () => {
       );
     });
   }, []);
-  console.log("updateProduct", updateProduct);
 
   const handleDrop = (e: any) => {
     e.preventDefault();
@@ -109,7 +107,6 @@ const AddProducts = () => {
       reader.readAsDataURL(file);
     }
   };
-  console.log("formData", formData);
 
   const handleFileInputChange = async (e: any) => {
     const file = e.target.files[0];
@@ -152,7 +149,6 @@ const AddProducts = () => {
       ? await updateProductData(formData)
       : await addNewProduct(formData);
     if (res.success === true) {
-      console.log("res", res);
       router.push("/admin-view/all-products");
       toast.success(res.message);
       setFormData(initialFormData);

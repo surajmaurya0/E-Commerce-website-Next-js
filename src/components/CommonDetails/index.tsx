@@ -30,7 +30,6 @@ const CommonDetails = ({ item }: any) => {
       setShowCartModel(true)
       setComponentLevelLoader({loading:false,id:''})
     }
-    console.log('res',res)
 
   }
   return (

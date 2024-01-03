@@ -39,7 +39,6 @@ const Login = () => {
   const onLoginSubmit = async () => {
     setComponentLevelLoader({ loading: true, id: "" });
     const res = await logIn(logInData);
-    console.log("resresresresresresresresres",res);
     const { success, data, message } = res;
     if (!success) {
       setIsAuthUser(false);
@@ -56,7 +55,6 @@ const Login = () => {
     setIsAdminView(data?.user.role === "admin" ? true : false);
     setComponentLevelLoader({ loading: false, id: "" });
   };
-  console.log(isAuthUser, user);
 
   useEffect(() => {
     if (isAuthUser) router.push("/");

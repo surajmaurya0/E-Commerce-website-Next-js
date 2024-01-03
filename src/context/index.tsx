@@ -42,10 +42,8 @@ export default function GlobalState({ children }: GlobalStateProps) {
 
   const tokenValid = useCallback(async () => {
     const token = Cookies.get("token");
-    console.log(cookiesToken);
     const valid = await validateUser({ token });
     const { success, message } = valid;
-    console.log(message);
     if (!success) {
       Cookies.remove("token");
       localStorage.removeItem("user");

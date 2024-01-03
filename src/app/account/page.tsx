@@ -75,7 +75,6 @@ const Account = () => {
   const handleDelete = async (id: any) => {
     setComponentLevelLoader({ loading: true, id });
     const res = await deleteAddress(id);
-    console.log('sssssss',res);
     
     if (res.success) {
       toast.success(res.message, {
